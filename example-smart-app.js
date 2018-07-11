@@ -37,7 +37,7 @@
                    "Cache-Control": "no-cache",
                   // "Postman-Token": "9f1488d2-1096-4acf-b052-bb1721519dfd"
                }
-           }
+         }
            var id;
            $.ajax(settings).done(function (response) {
                console.log(response);
@@ -51,7 +51,7 @@
           p.id=id;
           p.email=obj1.email;
           ret.resolve(p);
-        });
+        
       } else {
         onError();
       }
@@ -60,7 +60,7 @@
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
 
-  };
+};
 
   function defaultPatient(){
     return {
