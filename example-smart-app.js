@@ -43,15 +43,13 @@
            $.ajax(settings).done(function (response) {
                console.log(response);
              console.log(smart.tokenResponse);
-             console.log(token);
-             console.log(idtoken);
              id=response.id;
            });
       
           var p = defaultPatient();
           p.name=obj1.name;
           p.id=id;
-          p.email=obj1.email;
+          p.email=obj1.id;
           ret.resolve(p);
       
       } else {
