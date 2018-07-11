@@ -48,7 +48,7 @@
       
           var p = defaultPatient();
           p.name=obj1.name;
-          p.id=id;
+          p.id=smart.tokenResponse.user;
           p.email=obj1.id;
           ret.resolve(p);
       
