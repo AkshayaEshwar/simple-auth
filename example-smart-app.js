@@ -43,6 +43,8 @@
            $.ajax(settings).done(function (response) {
                console.log(response);
              console.log(smart.tokenResponse);
+             console.log(token);
+             console.log(idtoken);
              id=response.id;
            });
       
@@ -70,17 +72,6 @@
     };
   }
   window.drawVisualization = function(p){
-    $('#holder').show();
-    $('#loading').hide();
-    $('#fname').html(p.fname);
-    $('#lname').html(p.lname);
-    $('#gender').html(p.gender);
-    $('#birthdate').html(p.birthdate);
-    $('#height').html(p.height);
-    $('#systolicbp').html(p.systolicbp);
-    $('#diastolicbp').html(p.diastolicbp);
-    $('#ldl').html(p.ldl);
-    $('#hdl').html(p.hdl);
     $('#name').html(p.name);
     $('#id').html(p.id);
     $('#email').html(p.email);
