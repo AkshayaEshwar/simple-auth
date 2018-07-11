@@ -40,11 +40,44 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
     <script>
-      extractData().then(
-        //Display Patient Demographics and Observations if extractData was success
-        function(p) {
-          drawVisualization(p);
-        },
+      
+        function onReady(smart)  {
+            var url = smart.server.serviceUrl;
+      //getting the access token
+      var token = smart.server.auth.token;
+        var arr=token.split('.');
+        var head = arr[0];
+        var load = arr[1];
+        //getting the id token(response token)
+       var idtoken=smart.tokenResponse.id_token;
+       //var accesstoken=smart.server.access.token;
+       var array = idtoken.split('.');
+       var header = window.atob(array[0]);
+       var payload = window.atob(array[1]);
+       var res = header + payload;
+       var obj1 = JSON.parse(payload);
+        var text="Bearer "+token;
+    // document.getElementById("demo").innerHTML = obj1.name + ", " + obj.sub + "," + obj.profile
+         var settings = {
+               "async": true,
+               "crossDomain": true,
+               "url": obj1.fhirUser,
+               "method": "GET",
+               "headers": {
+                   "Accept": "application/json+fhir",
+                   "header": head,
+                   "Authorization": text,
+                   "Cache-Control": "no-cache",
+                  // "Postman-Token": "9f1488d2-1096-4acf-b052-bb1721519dfd"
+               }
+           }
+           var id;
+           $.ajax(settings).done(function (response) {
+               console.log(response);
+             console.log(smart.tokenResponse);
+             id=response.id;
+           });
+        }
         //Display 'Failed to call FHIR Service' if extractData failed
         function() {
           $('#loading').hide();
