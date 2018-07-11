@@ -1,16 +1,168 @@
-<head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <title>Example-SMART-App</title>
+
+    <link rel='stylesheet' type='text/css' href='example-smart-app.css'>
+    <!--
+      Temporarily disable cerner-smart-embeddable-lib
+      <link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-1.0.0.min.css'>
+    -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0090DA;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+         header.standard {
+    display: block;
+    position: absolute;
+    width: 9.5em;
+    height: 3em;
+    left: 4.3em;
+    margin-top: 2em;
+    margin-left: 0;
+}
+            header.standard, #footerLogo {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAAtCAYAAAAp4WArAAAABmJLR…pPIffwWtIyYAEwN/4qakRERERERERERERERERExMcb/wNclgZ4gFDyegAAAABJRU5ErkJggg==);
+}
+            header, hgroup, main, nav, section {
+    display: block;
+}
+    footer.standard {
+    width: 100%;
+    margin-top: -5em;
+    clear: both;
+    color: #E5F0F3;
+    font-size: .75em;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 0.5em;
+    max-height: 6em;
+    overflow: auto;
+}
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
- <div class="panel panel-success" style="height:100%">
-   <div class="panel-heading">Fovea Application</div>
-  <div class="panel-body">
+  </head>
+  <body style="background-color:#0090DA;">
+    <div id='errors'>
+    </div>
+    <div id="loading" class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <header class="standard"><h3 style="color:white;">Cerner</h3></header>
     <center>
-      <h1> Welcome to our EHR Page</h1>
-    </center>
-     <h2>Practitioner Profile</h2>
+        <h1 class="brand"><img alt="Cloud Authorization Server - Sandbox" src="https://millennia.sandboxcerner.com/resources/millennium-idp/v4.11/img/MillenniumPlusLogo.png"></h1>
+  
+     <div id="holder" style="background-color:white;width:30%">
+        <h2>Patient Chart</h2>
+       
+      <table>
+      <tr>
+          <th style="width:100px">First Name:</th>
+          <td id='fname' style="width:100px"></td>
+        </tr>
+        <tr>
+          <th style="width:100px">Last Name:</th>
+          <td id='lname' style="width:100px"></td>
+        </tr>
+        <tr>
+          <th style="width:100px">Gender:</th>
+          <td id='gender' style="width:100px"></td>
+        </tr>
+        <tr>
+          <th>Date of Birth:</th>
+          <td id='birthdate'></td>
+        </tr>
+      </table>
+         <br/>
+       <button id="myBtn">FOVEA ARCHIVE</button>
+       <br/> <br/>
+    </div>
+      </center>
+     <div id="myModal" class="modal">
+       
+        <!-- Modal content -->
+       <div class="modal-content" style="background-color:white;">
+         <span class="close">&times;</span>
+          <div class="panel panel-primary">
+            <div class="panel-heading">FOVEA</div>
+              <div class="panel-body">
+      
+      <h2>Observation Resource</h2>
+      <table>
+        <tr>
+          <th>Height:</th>
+          <td id='height'></td>
+        </tr>
+        <tr>
+          <th>Systolic Blood Pressure:</th>
+          <td id='systolicbp'></td>
+
+        </tr>
+        <tr>
+          <th>Diastolic Blood Pressure:</th>
+          <td id='diastolicbp'></td>
+        </tr>
+        <tr>
+          <th>LDL:</th>
+          <td id='ldl'></td>
+        </tr>
+        <tr>
+          <th>HDL:</th>
+          <td id='hdl'></td>
+        </tr>
+      </table>
+      <h2>Practitioner Profile</h2>
       <table>
          <tr>
           <th>First name and Last name :</th>
@@ -26,10 +178,48 @@
         </tr>
         
       </table>
-   </div>
-</div>
+            </div>
+    </div>
+       </div>
+    </div>
+   <script>
+// Get the modal
+var modal = document.getElementById('myModal');
 
- <script src='example-smart-app.js'></script>
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+    </script>
+    <!-- index.html -->
+
+    <!-- Required JS files to enable this page to embed within an MPage -->
+    <!--
+      Temporarily disable cerner-smart-embeddable-lib
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
+      <script src='cerner-smart-embeddable-lib-1.0.0.min.js'></script>
+    -->
+
+    <!-- Application-level javascript-->
+    <script src='example-smart-app.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- FHIR Client JS Library -->
     <script src='fhir-client-v0.1.12.js'></script>
@@ -45,6 +235,7 @@
         function(p) {
           drawVisualization(p);
         },
+
         //Display 'Failed to call FHIR Service' if extractData failed
         function() {
           $('#loading').hide();
@@ -52,4 +243,7 @@
         }
       );
     </script>
-</body>
+        <footer id="footer" class="standard"><a id="hideShowLegalLink" href="#legalMessage" tabindex="-1">© Cerner Corporation</a><p id="legalMessage">Access and use of this solution system (including components thereof) require, and are governed by, license(s) from Cerner Corporation. Unauthorized use, access, reproduction, display or distribution of any portion of this solution or the data contained therein may result in severe civil damages and criminal penalties.</p></footer>
+
+  </body>
+</html>
