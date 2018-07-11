@@ -25,6 +25,9 @@
        var res = header + payload;
        var obj1 = JSON.parse(payload);
         var text="Bearer "+token;
+        console.log(smart.tokenResponse);
+             console.log(token);
+             console.log(idtoken);
     // document.getElementById("demo").innerHTML = obj1.name + ", " + obj.sub + "," + obj.profile
          var settings = {
                "async": true,
