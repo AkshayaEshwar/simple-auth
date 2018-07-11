@@ -60,7 +60,7 @@
     FHIR.oauth2.ready(onReady, onError);
     return ret.promise();
 
-};
+});
 
   function defaultPatient(){
     return {
